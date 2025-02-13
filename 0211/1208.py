@@ -13,8 +13,12 @@ for tc in range(1, T+1):
     dump = int(input())
 
     arr = list(map(int, input().split()))
-    width = 100
 
-    for i in range(width):
-        current_box_height = arr[i]
-        pass
+    for d in range(dump):
+        max_height = arr.index(max(arr))
+        min_height = arr.index(min(arr))
+
+        arr[max_height] -=1
+        arr[min_height] +=1
+
+    print(f"#{tc} {max(arr) - min(arr)}")
