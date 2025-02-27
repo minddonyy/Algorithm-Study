@@ -15,7 +15,7 @@ sum = 0
 for i in range(1,7):
     up_number = i # 첫번째 주사위의 윗면을 정함
     for j in range(N):
-        if up_number == matrix
+        pass
 
 
 
