@@ -1,5 +1,5 @@
 import sys
-sys.stdin = open("input_23795.txt","r")
+sys.stdin = open("input_23795.txt", "r")
 
 def check_beam(alien, matrix):
     dr = [-1, 1, 0, 0]
