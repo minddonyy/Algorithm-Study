@@ -19,7 +19,7 @@ def dfs(start_x, start_y):
         next_x = start_x + dx
         next_y = start_y + dy
 
-        if 0 <= next_x < n and 0 <= next_y < n and visited[next_x][next_y] != 1:
+        if 0 <= next_x < n and 0 <= next_y < n and visited[next_x][next_y] != 1 and maze[next_x][next_y] != 1:
             visited[next_x][next_y] = 1
             if dfs(next_x, next_y):
                 return 1
