@@ -16,39 +16,43 @@ from collections import deque
 
 dxy = [[-1, 0], [1, 0], [0, -1], [0, 1]] # 상하좌우
 # 파이프별로 갈 수 있는 조건을 만들어줘야함
-can_go = {
-    (-1, 0) : [1, 2, 4, 7], #상
-    (1, 0) : [1, 2, 5, 6], #하
-    (0, -1) : [1, 3, 6, 7], #좌
-    (0, 1) : [1, 3, 4, 5] # 우
+pipe = {
+    1: [(-1,0), (1,0), (0,-1), (0,1)],
+    2: [(-1,0), (1,0)],
+    3: [(0,-1), (0,1)],
+    4: [(-1,0), (0,1)],
+    5: [(1,0), (0,1)],
+    6: [(1,0), (0,-1)],
+    7: [(-1,0), (0,-1)],
 }
 
 def find_place(x, y):
     queue = deque()
-    queue.append((x,y,0)) #큐에 넣어줌
+    queue.append((x,y)) #큐에 넣어줌
     visited[x][y] = 1 #방문처리
-    count = 0
+    count = 1
 
     while queue:
-        x, y, cnt = queue.popleft()
+        x, y = queue.popleft()
         # cnt를 반환해야 하는 조건이 필요함
         # cnt랑 L 이랑 비교해야함
 
-        if cnt <= L:
-            break
+        time = visited[x][y]
 
-        for dx, dy in dxy:
+        if time == L:
+            continue
+
+        for dx, dy in pipe[under_map[x][y]]:
             nx = dx + x
             ny = dy + y
 
-            cur_location = under_map[nx][ny]
-            if 0 <= nx < N and 0 <= ny < M and visited[nx][ny] != 1 and cur_location != 0:
-                if cur_location in can_go[(dx, dy)]:
-                    visited[nx][ny] = 1
+            if 0 <= nx < N and 0 <= ny < M and visited[nx][ny] == 0 and under_map[nx][ny] != 0:
+                if (-dx, -dy) in pipe[under_map[nx][ny]]:
+                    visited[nx][ny] = time + 1
                     queue.append((nx, ny))
-                    cnt += 1
+                    count+=1
 
-    return cnt
+    return count
 
 T = int(input())
 for tc in range(1, T+1):
