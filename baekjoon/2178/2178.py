@@ -15,29 +15,37 @@ sys.stdin = open("input.txt", "r")
 """
 from collections import deque
 dxy = [[0, -1], [0, 1], [-1, 0], [1, 0]]
-def bfs(x, y):
+def bfs(x, y, cnt = 1):
+    min_cnt = 999999999
     queue = deque()
-    queue.append((x, y))
-    visited[x][y] = 1
+    queue.append((x, y, cnt))
 
     while queue:
-        start_x, start_y = queue.popleft()
+        start_x, start_y, cnt = queue.popleft()
+
+        if (start_x == N-1) and (start_y == M-1):
+            if min_cnt > cnt:
+                min_cnt = cnt
+            return min_cnt
 
         for dx, dy in dxy:
             nx = start_x + dx
             ny = start_y + dy
 
-            if 0 <= nx < N and 0 <= ny < N and visited[nx][ny] != 1 and maze[nx][ny] != 1:
+            if 0 <= nx < N and 0 <= ny < M:
+                if visited[nx][ny] == 1:
+                    continue
+                if maze[nx][ny] == 0:
+                    continue
                 visited[nx][ny] = 1
-                queue.append((nx, ny))
+                queue.append((nx, ny, cnt+1))
 
-                if nx == N - 1 and ny == M - 1:
-                    return distance[nx][ny]
+    return cnt
 
 
 N, M = map(int, input().split())
 maze = [list(map(int, input().strip())) for _ in range(N)]
 visited = [[0]*M for _ in range(N)]
-
 result = bfs(0, 0)
 
+print(result)
