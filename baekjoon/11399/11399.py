@@ -10,6 +10,8 @@
 N = int(input())
 p_list = list(map(int, input().split())) # 인출하는데 걸리는 시간
 
+p_list.sort()
+
 sum_list = []
 total = 0
 result =0
@@ -18,8 +20,8 @@ for i in range(len(p_list)):
     sum_list.append(total)
 
 for j in range(len(sum_list)):
-    print(sum_list[j])
     result+=sum_list[j]
 
 print(result)
+
 
