@@ -1,6 +1,7 @@
 import sys
 sys.stdin = open("input.txt", "r")
 
+<<<<<<< HEAD
 """
 표준 입력으로 다음 정보가 주어진다. 
 첫 번째 줄에는 도시의 개수를 나타내는 정수 N(2 ≤ N ≤ 100,000)이 주어진다. 
@@ -18,3 +19,11 @@ gas = 0
 
 for i in range(N-1):
     print(gas_costs[i], gas_costs[i+1])
+=======
+N = int(input()) # 도시의 개수
+load = list(map, int(input().split())) # 도시를 잇는 도로의 길이
+price = list(map, int(input().split()))
+
+for i in range(N):
+    pass
+>>>>>>> 3726f8e3032ad8328d62f92ff83a0538296278f2
